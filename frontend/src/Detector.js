@@ -1,8 +1,9 @@
-// src/Detector.js
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./App.css";
+
+const API = process.env.REACT_APP_API_URL || "https://phishing-detection-bxef.onrender.com";
 
 function Detector() {
   const [url, setUrl] = useState("");
@@ -34,7 +35,8 @@ function Detector() {
     setTrustScore(null);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/predict", { url });
+     const response = await axios.post("https://phishing-detection-bxef.onrender.com/predict", { url });
+
       const data = response.data;
 
       setResult(data.result);
@@ -132,7 +134,7 @@ function Detector() {
           )}
         </div>
 
-        {showInfo && (
+        {showInfo && details && (
           <div className="info-modal">
             <div className="info-modal-content">
               <button className="close-btn" onClick={handleCloseInfo}>X</button>
